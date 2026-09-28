@@ -1,0 +1,15 @@
+{
+  "name": "be-03-auth-login-protect",
+  "version": "1.0.0",
+  "description": "Secure authentication API using Node.js, Express, Supabase Auth, JWT bearer tokens, middleware, and Swagger UI.",
+  "main": "server.js",
+  "scripts": {"start": "node server.js", "dev": "node --watch server.js"},
+  "keywords": ["node", "express", "supabase", "authentication", "jwt", "swagger"],
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.57.4",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

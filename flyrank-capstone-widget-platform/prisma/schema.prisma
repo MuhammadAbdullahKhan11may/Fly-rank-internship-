@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WidgetType {
+  SIGNUP
+  CONTACT
+  CTA
+  POPOVER
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  passwordHash String
+  widgets      Widget[]
+  submissions Submission[]
+  createdAt    DateTime     @default(now())
+}
+
+model Widget {
+  id          String       @id @default(cuid())
+  ownerId     String
+  owner       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  type        WidgetType   @default(CONTACT)
+  title       String
+  description String       @default("")
+  buttonText  String       @default("Submit")
+  fields      Json
+  submissions Submission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([ownerId])
+}
+
+model Submission {
+  id          String   @id @default(cuid())
+  widgetId    String
+  ownerId     String
+  widget      Widget   @relation(fields: [widgetId], references: [id], onDelete: Cascade)
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  payload     Json
+  ipAddress   String?
+  country     String?
+  city        String?
+  geoProvider String?
+  createdAt   DateTime @default(now())
+
+  @@index([ownerId, createdAt])
+  @@index([widgetId, createdAt])
+  @@index([country])
+}

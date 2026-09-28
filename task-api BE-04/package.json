@@ -1,0 +1,10 @@
+{
+  "name": "task-api-postgres",
+  "version": "3.0.0",
+  "description": "Containerized CRUD Task API using Node.js, Express, PostgreSQL, Docker Compose, and Swagger UI.",
+  "main": "server.js",
+  "scripts": {"start":"node server.js","dev":"node --watch server.js"},
+  "keywords":["node","express","crud","rest-api","postgresql","docker","swagger"],
+  "license":"MIT",
+  "dependencies":{"dotenv":"^16.4.7","express":"^5.1.0","pg":"^8.13.1","swagger-ui-express":"^5.0.1"}
+}

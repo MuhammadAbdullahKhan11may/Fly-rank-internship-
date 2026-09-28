@@ -1,0 +1,24 @@
+{
+  "name": "task-api",
+  "version": "1.0.0",
+  "description": "A persistent CRUD Task API built with Node.js, Express, SQLite, and Swagger UI.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "crud",
+    "rest-api",
+    "sqlite",
+    "swagger"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0",
+    "swagger-ui-express": "^5.0.1",
+    "better-sqlite3": "^12.2.0"
+  }
+}

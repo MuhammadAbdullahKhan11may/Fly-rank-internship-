@@ -1,0 +1,17 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "BE-03 Auth API", "version": "1.0.0", "description": "Supabase authentication API with public and JWT-protected routes."},
+  "servers": [{"url": "http://localhost:3000"}],
+  "paths": {
+    "/auth/signup": {"post": {"summary": "Create a user account", "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Credentials"}}}}, "responses": {"201": {"description": "User created"}, "400": {"description": "Missing/invalid input"}}}},
+    "/auth/login": {"post": {"summary": "Log in and receive tokens", "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Credentials"}}}}, "responses": {"200": {"description": "Login successful"}, "400": {"description": "Missing input"}, "401": {"description": "Invalid credentials"}}}},
+    "/auth/logout": {"post": {"summary": "Log out current user", "security": [{"bearerAuth": []}], "responses": {"204": {"description": "Logged out"}, "401": {"description": "Missing/invalid token"}}}},
+    "/public/info": {"get": {"summary": "Public information", "responses": {"200": {"description": "Public response"}}}},
+    "/protected/profile": {"get": {"summary": "Authenticated user profile", "security": [{"bearerAuth": []}], "responses": {"200": {"description": "Profile returned"}, "401": {"description": "Missing/invalid token"}}}},
+    "/protected/dashboard": {"get": {"summary": "Second protected route", "security": [{"bearerAuth": []}], "responses": {"200": {"description": "Dashboard returned"}, "401": {"description": "Missing/invalid token"}}}}
+  },
+  "components": {
+    "securitySchemes": {"bearerAuth": {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}},
+    "schemas": {"Credentials": {"type": "object", "required": ["email", "password"], "properties": {"email": {"type": "string", "format": "email", "example": "test@example.com"}, "password": {"type": "string", "format": "password", "example": "password123"}}}}
+  }
+}
